@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "955525480831",
+    "project_id": "mom-style-com-ua",
+    "storage_bucket": "mom-style-com-ua.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955525480831:android:d65a47bd83fd7a95709a4a",
+        "android_client_info": {
+          "package_name": "com.momstyle.momstyle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955525480831-ug4lb20m96i2b95mvl8ofo4tgn3i13gk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB22fUfR8iEIyxxcJ5qbok5BPSlX5weW1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955525480831-ug4lb20m96i2b95mvl8ofo4tgn3i13gk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
