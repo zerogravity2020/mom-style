@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, FlatList, Dimensions } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { Modal, SlideAnimation, ModalContent } from 'react-native-modals'
 import { AirbnbRating } from 'react-native-ratings'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -26,6 +27,7 @@ const modal = {
 class Reviews extends Component {
 	componentDidMount() {
 		moment.locale('uk')
+		ReviewsModule.load(CardModule.card.id)
     }
 
     _renderItem = ({item, index}) => {
@@ -72,23 +74,25 @@ class Reviews extends Component {
 		const {theme} = this.props
 		if (loading) return <Loader />
 		else return (
-			<View style={theme === 'dark' ? styles.pageDark : styles.page}>
-				<FlatList data={items}
-						  keyExtractor={(item, index) => `review-${item.id}`}
-						  renderItem={this._renderItem}
-						  ListEmptyComponent={this._renderEmpty}
-						  initialNumToRender={10}
-						  ref="reviewsList"
-						  onEndReached={() => ReviewsModule.onLoadMore()}
-        			      onEndReachedThreshold={0.5}
-        			      onRefresh={() => ReviewsModule.onRefresh()}
-    					  refreshing={refreshing}
-						  removeClippedSubviews={false}
-						  showsVerticalScrollIndicator={false} />
-				<View style={theme === 'dark' ? styles.bottomPageDark : styles.bottomPage}>
-					<Button caption={'Залишити відгук'}
-							onPress={() => ReviewsModule.changeVisibleForm(true)} />
-				</View>
+			<>
+				<SafeAreaView style={theme === 'dark' ? styles.pageDark : styles.page}>
+					<FlatList data={items}
+							  keyExtractor={(item, index) => `review-${item.id}`}
+							  renderItem={this._renderItem}
+							  ListEmptyComponent={this._renderEmpty}
+							  initialNumToRender={10}
+							  ref="reviewsList"
+							  onEndReached={() => ReviewsModule.onLoadMore()}
+	        			      onEndReachedThreshold={0.5}
+	        			      onRefresh={() => ReviewsModule.onRefresh()}
+	    					  refreshing={refreshing}
+							  removeClippedSubviews={false}
+							  showsVerticalScrollIndicator={false} />
+					<View style={theme === 'dark' ? styles.bottomPageDark : styles.bottomPage}>
+						<Button caption={'Залишити відгук'}
+								onPress={() => ReviewsModule.changeVisibleForm(true)} />
+					</View>
+				</SafeAreaView>
 				<Modal visible={isFormVisible}
 					   onTouchOutside={() => ReviewsModule.changeVisibleForm(false)}
 					   modalAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
@@ -131,7 +135,7 @@ class Reviews extends Component {
 								onPress={() => {this.refs.reviewsList.scrollToOffset({ animated: true, offset: 0 }); ReviewsModule.createReview()}} />
 					</ModalContent>
 				</Modal>
-			</View>
+			</>
 		)
 	}
 }

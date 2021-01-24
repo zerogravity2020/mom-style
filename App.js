@@ -60,6 +60,7 @@ function Stack() {
 				screenOptions={{
 					statusBarStyle: 'light-content',
 					headerTintColor: constants.palette.gray,
+					headerStyle: {elevation: 0},
 					headerRight: () => (
 						<>
 							<Ripple rippleColor={constants.palette.main}

@@ -1,6 +1,5 @@
 import api from './api'
 import axios from 'axios'
-import { observer } from "mobx-react"
 
 axios.defaults.baseURL = 'http://www.mom-style.com.ua/wp-json'
 

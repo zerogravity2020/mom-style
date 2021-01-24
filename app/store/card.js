@@ -112,6 +112,7 @@ class CardModule {
             this.form.email = Store.profileData.billing.email
             this.form.phone = Store.profileData.billing.phone
         }
+
         await Service.Product(id)
                 .then(res => {
                     this.item = res.data
@@ -121,15 +122,18 @@ class CardModule {
                 })
                 .finally(() => {this.isLoading = false})
                 
-        
-        Service.ProductVariations(id)
-                .then(res => {this.variations = res.data})
+        if (this.item.variations.length > 0) {
+            await Service.ProductVariations(id)
+                    .then(res => {this.variations = res.data})
+        }
 
-        this.item.cross_sell_ids.forEach(item => 
-            Service.Product(item)
-                .then(res => this.cross_sell.push(res.data))
-        )
-        Service.Products(`category=${category}`)
+        if (this.item.cross_sell_ids.length > 0) {
+            let query = toJS(this.item.cross_sell_ids).join()
+            await Service.Products(`include=${query}`)
+                    .then(res => this.cross_sell = res.data)
+        }
+
+        await Service.Products(`category=${category}`)
                 .then(res => {this.category_products = res.data})
     }
 

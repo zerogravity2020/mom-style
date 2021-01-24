@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, View, Text, Modal, ScrollView } from 'react-native'
 import { observer, Observer } from "mobx-react"
+import { SafeAreaView } from 'react-native-safe-area-context'
 import moment from 'moment/min/moment-with-locales'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import HTML from 'react-native-render-html'
@@ -60,21 +61,22 @@ class Blog extends Component {
 			    	<Modal visible={true}
 						   animationType='fade'
 						   transparent={true}>
-						<ScrollView showsVerticalScrollIndicator={false}
-									style={theme === 'dark' ? styles.pageDark : styles.page}>
-							<Ripple rippleColor={constants.palette.main}
-									rippleCentered={true}
-									onPress={() => PostsModule.openModal(false)}
-									style={[styles.headerBtn, styles.modalBtn]}>
-		                		<Icon name="remove" color={constants.palette.gray} size={22} />
-		                	</Ripple>
-		                	<View style={styles.content}>
-		                		<Text style={[styles.modalTitle, theme === 'dark' ? styles.textColorDark : styles.textColor]}>{postData.title.rendered}</Text>
-			                	<HTML html={postData.content.rendered}
-									  baseFontStyle={theme === 'dark' ? styles.textBaseDark : styles.textBase}
-			                          tagsStyles={{a: styles.link, p: styles.p, ul: styles.ul, li: styles.li, img: styles.img}} />
-							</View>
-						</ScrollView>
+						<SafeAreaView style={theme === 'dark' ? styles.pageDark : styles.page}>
+							<ScrollView showsVerticalScrollIndicator={false}>
+								<Ripple rippleColor={constants.palette.main}
+										rippleCentered={true}
+										onPress={() => PostsModule.openModal(false)}
+										style={[styles.headerBtn, styles.modalBtn]}>
+			                		<Icon name="remove" color={constants.palette.gray} size={22} />
+			                	</Ripple>
+			                	<View style={styles.content}>
+			                		<Text style={[styles.modalTitle, theme === 'dark' ? styles.textColorDark : styles.textColor]}>{postData.title.rendered}</Text>
+				                	<HTML html={postData.content.rendered}
+										  baseFontStyle={theme === 'dark' ? styles.textBaseDark : styles.textBase}
+				                          tagsStyles={{a: styles.link, p: styles.p, ul: styles.ul, li: styles.li, img: styles.img}} />
+								</View>
+							</ScrollView>
+						</SafeAreaView>
 					</Modal>
 				}
 			</View>

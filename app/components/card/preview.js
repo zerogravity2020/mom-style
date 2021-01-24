@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Dimensions, Modal } from 'react-native'
 import { observer } from "mobx-react"
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Slick from 'react-native-slick'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ripple from 'react-native-material-ripple'
@@ -38,22 +39,24 @@ class ProductCardPreview extends Component {
 		    	<Modal visible={CardModule.modalOpen}
 		    		   animationType='fade'
 					   transparent={true}>
-					<View style={[styles.page, styles.pageCenter]}>
-						<Ripple rippleColor={constants.palette.main}
-								rippleCentered={true}
-								onPress={() => CardModule.openModal(false)}
-								style={[styles.headerBtn, styles.modalBtn]}>
-	                		<Icon name="remove" color={constants.palette.gray} size={22} />
-	                	</Ripple>
-                		<ImageZoom cropWidth={Dimensions.get('window').width}
-			                       cropHeight={Dimensions.get('window').height}
-			                       imageWidth={photoSize}
-			                       imageHeight={photoSize}
-			                       enableSwipeDown={true}
-                        		   onSwipeDown={() => CardModule.openModal(false)}>
-			    			<Image source={{uri: getCurrentSlide.src}} style={{width: photoSize, height: photoSize}} />
-			    		</ImageZoom>
-					</View>
+					<SafeAreaView style={styles.page}>
+						<View style={[styles.main, styles.pageCenter]}>
+							<Ripple rippleColor={constants.palette.main}
+									rippleCentered={true}
+									onPress={() => CardModule.openModal(false)}
+									style={[styles.headerBtn, styles.modalBtn]}>
+		                		<Icon name="remove" color={constants.palette.gray} size={22} />
+		                	</Ripple>
+	                		<ImageZoom cropWidth={Dimensions.get('window').width}
+				                       cropHeight={Dimensions.get('window').height}
+				                       imageWidth={photoSize}
+				                       imageHeight={photoSize}
+				                       enableSwipeDown={true}
+	                        		   onSwipeDown={() => CardModule.openModal(false)}>
+				    			<Image source={{uri: getCurrentSlide.src}} style={{width: photoSize, height: photoSize}} />
+				    		</ImageZoom>
+				    	</View>
+					</SafeAreaView>
 				</Modal>
 			</>
 		)

@@ -51,9 +51,9 @@ class Store {
 
     @action
     load = async () => {
-        Service.CurrentCurrency()
+        await Service.CurrentCurrency()
                 .then(res => {this.currency = res.data.symbol})
-        Service.Country()
+        await Service.Country()
                 .then(res => {this.country = res.data})
     }
 

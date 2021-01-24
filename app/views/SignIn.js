@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, KeyboardAvoidingView, ScrollView, TouchableOpacity, Text } from 'react-native'
+import { View, KeyboardAvoidingView, ScrollView, TouchableOpacity, Text, Platform } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { observer } from "mobx-react"
 import UserModule from '../store/user'
 import Button from '../components/Button'
@@ -16,30 +17,34 @@ class SignIn extends Component {
 		const {theme} = this.props
 
 		return (
+			
 			<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "75"}
 								  style={theme === 'dark' ? styles.pageDark : styles.page}
-								  keyboardVerticalOffset={70}>
-				<ScrollView style={styles.content}
-							showsVerticalScrollIndicator={false}>
-					<Input placeholder="Логін або Email"
-						   value={formLogin.username}
-						   keyboardType="email-address"
-						   onChangeText={value => UserModule.changeInput('login', value, 'username')} />
-					<Input placeholder="Пароль"
-						   value={formLogin.password}
-						   secureTextEntry={true}
-						   onChangeText={value => UserModule.changeInput('login', value, 'password')} />
-					<TouchableOpacity onPress={() => navigator.navigate('Restore')}>
-						<Text style={styles.link}>Забули пароль?</Text>
-					</TouchableOpacity>
-				</ScrollView>
-				<View style={theme === 'dark' ? styles.bottomPageDark : styles.bottomPage}>
-					<Button caption="Вхід"
-							disabled={formLoginDisabled || loadingLoginForm}
-							loading={loadingLoginForm}
-							onPress={() => UserModule.signIn()} />
-				</View>
+								  keyboardVerticalOffset={140}>
+				<SafeAreaView style={styles.main}>
+					<ScrollView style={styles.content}
+								showsVerticalScrollIndicator={false}>
+						<Input placeholder="Логін або Email"
+							   value={formLogin.username}
+							   keyboardType="email-address"
+							   onChangeText={value => UserModule.changeInput('login', value, 'username')} />
+						<Input placeholder="Пароль"
+							   value={formLogin.password}
+							   secureTextEntry={true}
+							   onChangeText={value => UserModule.changeInput('login', value, 'password')} />
+						<TouchableOpacity onPress={() => navigator.navigate('Restore')}>
+							<Text style={styles.link}>Забули пароль?</Text>
+						</TouchableOpacity>
+					</ScrollView>
+					<View style={theme === 'dark' ? styles.bottomPageDark : styles.bottomPage}>
+						<Button caption="Вхід"
+								disabled={formLoginDisabled || loadingLoginForm}
+								loading={loadingLoginForm}
+								onPress={() => UserModule.signIn()} />
+					</View>
+				</SafeAreaView>
 			</KeyboardAvoidingView>
+			
 		)
 	}
 }

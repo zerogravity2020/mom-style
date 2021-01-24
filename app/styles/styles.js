@@ -53,10 +53,6 @@ const styles = StyleSheet.create({
 		padding: 15,
 		backgroundColor: constants.paletteDark.bg
 	},
-	bottomPageRow: {
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
 	bottomPageLeft: {
 		flex: 1
 	},
@@ -408,7 +404,7 @@ const styles = StyleSheet.create({
 	empty: {
 		flex: 1,
 		justifyContent: 'center',
-		paddingTop: '60%',
+		paddingTop: '55%',
 		paddingHorizontal: 15,
 		alignItems: 'center'
 	},
@@ -727,9 +723,9 @@ const styles = StyleSheet.create({
 	},
 	modalBtnRight: {
 		position: 'absolute',
-		right: 10,
+		right: 0,
 		zIndex: 99,
-		top: 10
+		top: 0
 	},
 	modalTitle: {
 		fontSize: 24,
@@ -872,6 +868,16 @@ const styles = StyleSheet.create({
 	modalFilterRow: {
 		flexDirection: 'row',
 		justifyContent: 'space-between'
+	},
+	modalFilterList: {
+		flexDirection: 'column',
+		flexWrap: 'nowrap'
+	},
+	modalFilterListText: {
+		fontSize: 16
+	},
+	modalFilterListLink: {
+		marginTop: 10
 	},
 	modalFilterBlock: {
 		marginBottom: 20,
