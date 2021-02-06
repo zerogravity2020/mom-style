@@ -5,15 +5,15 @@ import constants from '../constants'
 import Theme from '../theme'
 
 class Loader extends Component {
-	render() {
-		const {theme} = this.props
+    render() {
+        const {theme} = this.props
 
-		return (
-			<View style={theme === 'dark' ? styles.loaderDark : styles.loader}>
-				<ActivityIndicator size="large" color={constants.palette.main} />
-			</View>
-		)
-	}
+        return (
+            <View style={theme === 'dark' ? styles.loaderDark : styles.loader}>
+                <ActivityIndicator size="large" color={constants.palette.main} />
+            </View>
+        )
+    }
 }
 
 export default Theme(Loader)

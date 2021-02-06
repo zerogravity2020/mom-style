@@ -7,32 +7,32 @@ import CardModule from '../../store/card'
 
 class ProductCardAttributes extends Component {
 
-	render() {
-		const {data, getAttribute} = this.props
+    render() {
+        const {data, getAttribute} = this.props
 
-		const list = data.map(attribute => 
-    		<View key={`attribute-${attribute.id}`}
-    			  style={styles.cardAttributes}>
-    			<View style={styles.cardAttributesList}>
-	    			{attribute.options.map(option => 
-	    				<Ripple style={styles.cardAttribute}
-	    						onPress={() => {getAttribute(option)}}
-	    						rippleCentered={true}
-	    						key={`option-${option}`}
-	    						style={[styles.cardAttribute, option == CardModule.getAciveAttribute && styles.cardAttributeActive]}>
-	    					<Text style={styles.cardAttributeText}>{option}</Text>
-		    			</Ripple>
-	    			)}
-	    		</View>
-    		</View>
-    	)
+        const list = data.map(attribute => 
+            <View key={`attribute-${attribute.id}`}
+                  style={styles.cardAttributes}>
+                <View style={styles.cardAttributesList}>
+                    {attribute.options.map(option => 
+                        <Ripple style={styles.cardAttribute}
+                                onPress={() => {getAttribute(option)}}
+                                rippleCentered={true}
+                                key={`option-${option}`}
+                                style={[styles.cardAttribute, option == CardModule.getAciveAttribute && styles.cardAttributeActive]}>
+                            <Text style={styles.cardAttributeText}>{option}</Text>
+                        </Ripple>
+                    )}
+                </View>
+            </View>
+        )
 
-		return (
-			<View style={styles.cardAttributes}>
-				{list}
-			</View>
-		)
-	}
+        return (
+            <View style={styles.cardAttributes}>
+                {list}
+            </View>
+        )
+    }
 }
 
 export default ProductCardAttributes

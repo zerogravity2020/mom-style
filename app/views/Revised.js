@@ -10,40 +10,40 @@ import Theme from '../theme'
 
 @observer
 class Revised extends Component {
-	componentDidMount() {
-		// CartModule.loadItems()
-	}
-	
-	_renderItem = ({item, index}) => {
-		return <Product 
-					item={item}
-					index={index}
-					onPress={() => {CartModule.setItem(`revise-${item.id}`, item); navigator.navigate('Product', {screen: 'Card', params: {productId: item.id, categoryId: item.categories[0].id}})}}
-			   />
+    componentDidMount() {
+        // CartModule.loadItems()
+    }
+    
+    _renderItem = ({item, index}) => {
+        return <Product 
+                    item={item}
+                    index={index}
+                    onPress={() => {CartModule.setItem(`revise-${item.id}`, item); navigator.navigate('Product', {screen: 'Card', params: {productId: item.id, categoryId: item.categories[0].id}})}}
+               />
     }
 
     _renderEmpty = () => {
-    	return <Empty icon="eye" caption="Ви ще нічого не переглянули" />
+        return <Empty icon="eye" caption="Ви ще нічого не переглянули" />
     }
 
     render() {
-		const {revisedList} = CartModule
-		const {theme} = this.props
+        const {revisedList} = CartModule
+        const {theme} = this.props
 
-		return (
-			<View style={theme === 'dark' ? styles.pageDark : styles.page}>
-				<FlatList data={revisedList}
-						  keyExtractor={(item, index) => `revised-product-${item.id}`}
-						  renderItem={this._renderItem}
-						  ListEmptyComponent={this._renderEmpty}
-						  numColumns={2}
-			              initialNumToRender={6}
-						  removeClippedSubviews={true}
-						  disableVirtualization={true}
-						  showsVerticalScrollIndicator={false} />
-			</View>
-		)
-	}
+        return (
+            <View style={theme === 'dark' ? styles.pageDark : styles.page}>
+                <FlatList data={revisedList}
+                          keyExtractor={(item, index) => `revised-product-${item.id}`}
+                          renderItem={this._renderItem}
+                          ListEmptyComponent={this._renderEmpty}
+                          numColumns={2}
+                          initialNumToRender={6}
+                          removeClippedSubviews={true}
+                          disableVirtualization={true}
+                          showsVerticalScrollIndicator={false} />
+            </View>
+        )
+    }
 }
 
 export default Theme(Revised)

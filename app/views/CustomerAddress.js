@@ -13,45 +13,45 @@ import Theme from '../theme'
 
 @observer
 class CustomerAddress extends Component {
-	componentDidMount() {
-		// UserModule.loadCustomer(Store.user)
-	}
-	
-	render() {
-		const {userData, loadingCustomerForm, loadingPageCustomer} = UserModule
-		const {theme} = this.props
-		
-		if (loadingPageCustomer) return <Loader />
-		else return (
-			<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "75"}
-								  style={theme === 'dark' ? styles.pageDark : styles.page}
-								  keyboardVerticalOffset={90}>
-				<SafeAreaView style={styles.main}>
-					<ScrollView style={styles.content}
-								showsVerticalScrollIndicator={false}>
-						<Input placeholder="Адреса"
-							   value={userData.billing.address_1}
-							   textContentType="none"
-							   onChangeText={value => UserModule.changeInput('customer', value, 'address_1')} />
-						<Input placeholder="Місто"
-							   value={userData.billing.city}
-							   textContentType="addressCity"
-							   onChangeText={value => UserModule.changeInput('customer', value, 'city')} />
-						<Input placeholder="Область"
-							   value={userData.billing.state}
-							   textContentType="addressState"
-							   onChangeText={value => UserModule.changeInput('customer', value, 'state')} />
-					</ScrollView>
-					<View style={theme === 'dark' ? styles.bottomPageDark : styles.bottomPage}>
-						<Button caption="Оновити"
-								disabled={loadingCustomerForm}
-								loading={loadingCustomerForm} 
-								onPress={() => UserModule.updateCustomer()} />
-					</View>
-				</SafeAreaView>
-			</KeyboardAvoidingView>
-		)
-	}
+    componentDidMount() {
+        // UserModule.loadCustomer(Store.user)
+    }
+    
+    render() {
+        const {userData, loadingCustomerForm, loadingPageCustomer} = UserModule
+        const {theme} = this.props
+        
+        if (loadingPageCustomer) return <Loader />
+        else return (
+            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "75"}
+                                  style={theme === 'dark' ? styles.pageDark : styles.page}
+                                  keyboardVerticalOffset={90}>
+                <SafeAreaView style={styles.main}>
+                    <ScrollView style={styles.content}
+                                showsVerticalScrollIndicator={false}>
+                        <Input placeholder="Адреса"
+                               value={userData.billing.address_1}
+                               textContentType="none"
+                               onChangeText={value => UserModule.changeInput('customer', value, 'address_1')} />
+                        <Input placeholder="Місто"
+                               value={userData.billing.city}
+                               textContentType="addressCity"
+                               onChangeText={value => UserModule.changeInput('customer', value, 'city')} />
+                        <Input placeholder="Область"
+                               value={userData.billing.state}
+                               textContentType="addressState"
+                               onChangeText={value => UserModule.changeInput('customer', value, 'state')} />
+                    </ScrollView>
+                    <View style={theme === 'dark' ? styles.bottomPageDark : styles.bottomPage}>
+                        <Button caption="Оновити"
+                                disabled={loadingCustomerForm}
+                                loading={loadingCustomerForm} 
+                                onPress={() => UserModule.updateCustomer()} />
+                    </View>
+                </SafeAreaView>
+            </KeyboardAvoidingView>
+        )
+    }
 }
 
 export default Theme(CustomerAddress)

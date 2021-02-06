@@ -14,60 +14,60 @@ import Theme from '../theme'
 
 @observer
 class Search extends Component {
-	componentDidMount() {
-    	// SearchModule.load()
+    componentDidMount() {
+        // SearchModule.load()
     }
 
-	_renderItem = ({item}) => {
-		const {theme} = this.props
-		return <Field item={item}  />
+    _renderItem = ({item}) => {
+        const {theme} = this.props
+        return <Field item={item}  />
     }
 
     _renderEmpty = () => {
-    	const {theme} = this.props
-    	return <Empty icon="search-minus" caption="Нічого не знайдено" />
+        const {theme} = this.props
+        return <Empty icon="search-minus" caption="Нічого не знайдено" />
     }
 
     _renderSeparator = () => {
-    	return <Separator />
+        return <Separator />
     }
 
-	render() {
-		const {items, loading, searchText} = SearchModule
-		const {theme} = this.props
-		return (
-			<View style={theme === 'dark' ? styles.pageDark : styles.page}>
-				<View style={styles.search}>
-					<Icon name="search" color={constants.palette.gray} size={24} style={styles.searchLoupe} />
-					<TextInput style={[styles.searchText, theme === 'dark' ? [styles.textColorDark, styles.searchTextDark] : styles.textColor]}
-							   placeholderTextColor={constants.palette.gray}
-							   placeholder="Що ви шукаєте?"
-							   value={searchText}
-							   onChangeText={value => SearchModule.changeInput(value)} />
-					<Separator />
-					{searchText.length > 0 &&
-						<Ripple style={styles.searchClear}
-								rippleColor={constants.palette.main}
-								rippleCentered={true}
-								onPress={() => {SearchModule.changeInput('')}}>
-							<Icon name="remove" size={24} color={constants.palette.gray} />
-						</Ripple>
-					}
-				</View>
-				{loading && <Loader />}
-				{!loading &&
-					<FlatList data={items}
-							  keyExtractor={(item, index) => `product-${item.id}`}
-							  renderItem={this._renderItem}
-							  initialNumToRender={20}
-							  removeClippedSubviews={true}
-							  disableVirtualization={true}
-							  ListEmptyComponent={this._renderEmpty}
-							  ItemSeparatorComponent={this._renderSeparator} />
-				}
-			</View>
-		)
-	}
+    render() {
+        const {items, loading, searchText} = SearchModule
+        const {theme} = this.props
+        return (
+            <View style={theme === 'dark' ? styles.pageDark : styles.page}>
+                <View style={styles.search}>
+                    <Icon name="search" color={constants.palette.gray} size={24} style={styles.searchLoupe} />
+                    <TextInput style={[styles.searchText, theme === 'dark' ? [styles.textColorDark, styles.searchTextDark] : styles.textColor]}
+                               placeholderTextColor={constants.palette.gray}
+                               placeholder="Що ви шукаєте?"
+                               value={searchText}
+                               onChangeText={value => SearchModule.changeInput(value)} />
+                    <Separator />
+                    {searchText.length > 0 &&
+                        <Ripple style={styles.searchClear}
+                                rippleColor={constants.palette.main}
+                                rippleCentered={true}
+                                onPress={() => {SearchModule.changeInput('')}}>
+                            <Icon name="remove" size={24} color={constants.palette.gray} />
+                        </Ripple>
+                    }
+                </View>
+                {loading && <Loader />}
+                {!loading &&
+                    <FlatList data={items}
+                              keyExtractor={(item, index) => `product-${item.id}`}
+                              renderItem={this._renderItem}
+                              initialNumToRender={20}
+                              removeClippedSubviews={true}
+                              disableVirtualization={true}
+                              ListEmptyComponent={this._renderEmpty}
+                              ItemSeparatorComponent={this._renderSeparator} />
+                }
+            </View>
+        )
+    }
 }
 
 export default Theme(Search)

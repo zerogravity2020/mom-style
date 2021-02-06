@@ -10,25 +10,25 @@ import Theme from '../theme'
 
 @observer
 class Catalog extends Component {
-	_renderItem = ({item, index}) => {
-		return <Category item={item} index={index} />
+    _renderItem = ({item, index}) => {
+        return <Category item={item} index={index} />
     }
 
-	render() {
-		const {categoriesList} = CategoriesModule
-		const {theme} = this.props
+    render() {
+        const {categoriesList} = CategoriesModule
+        const {theme} = this.props
 
-		return (
-			<View style={theme === 'dark' ? styles.pageDark : styles.page}>
-				<FlatList data={categoriesList}
-						  keyExtractor={(item, index) => `category-${item.id}`}
-						  renderItem={this._renderItem}
-						  removeClippedSubviews={true}
-						  disableVirtualization={true}
-						  showsVerticalScrollIndicator={false} />
-			</View>
-		)
-	}
+        return (
+            <View style={theme === 'dark' ? styles.pageDark : styles.page}>
+                <FlatList data={categoriesList}
+                          keyExtractor={(item, index) => `category-${item.id}`}
+                          renderItem={this._renderItem}
+                          removeClippedSubviews={true}
+                          disableVirtualization={true}
+                          showsVerticalScrollIndicator={false} />
+            </View>
+        )
+    }
 }
 
 export default Theme(Catalog)
